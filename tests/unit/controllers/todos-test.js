@@ -43,3 +43,22 @@ test('remaining', function () {
 });
 
 
+test('completed', function () {
+	expect(2);
+	var controller = this.subject();
+	var models = mockModel(FIXTURES);
+	controller.addObjects(models);
+	equal(controller.get('completed'), 2);
+	controller.findBy('id', '3').set('isCompleted', true);
+	equal(controller.get('completed'), 3);
+});
+
+test('allAreDone', function() {
+	expect(2);
+	var controller = this.subject();
+	var models = mockModel(FIXTURES);
+	controller.addObjects(models);
+	equal(controller.get('allAreDone'), false);
+	controller.findBy('id', '3').set('isCompleted', true);
+	equal(controller.get('allAreDone'), true);
+});
